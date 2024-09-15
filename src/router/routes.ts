@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import AdminView from "../views/AdminView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
+import accessEnum from "@/access/accessEnum";
 
 // 提取通用路由文件到专门配置并且导出，直接作为 Header 参数传入动态渲染 Header
 export const routes: Array<RouteRecordRaw> = [
@@ -22,17 +23,23 @@ export const routes: Array<RouteRecordRaw> = [
     name: "管理后台",
     component: AdminView,
     meta: {
-      access: "canAdmin",
+      access: accessEnum.ADMIN,
     },
   },
   {
     path: "/noauth",
     name: "权限不足",
     component: NoAuthView,
+    meta: {
+      hideInMenu: true,
+    }
   },
   {
     path: "/notfound",
     name: "无法访问",
     component: NotFoundView,
+    meta: {
+      hideInMenu: true,
+    }
   },
 ];

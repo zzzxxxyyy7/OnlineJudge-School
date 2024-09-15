@@ -1,5 +1,5 @@
 <template>
-  <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu mode="horizontal" :selected-keys="selectedKeys" @menu-item-click="doMenuClick">
         <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
@@ -8,7 +8,8 @@
             <div class="title">莆田学院机电与信息工程学院在线代码评测平台</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <!-- 有hideInMenu则不展示 -->
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -23,12 +24,29 @@
 
 <script setup lang="ts">
 import { routes } from '@/router/routes';
-import { ref } from 'vue';
+import {computed, ref} from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const store = useStore();
+
+// 可以展示在菜单的路由数组
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    // 这个页面本事就不展示，对所有用户隐藏
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // TODO 针对特定用户隐藏的页面
+    if (!checkAccess(store.state.user.loginUser , item?.meta?.access as string)) {
+      return false;
+    }
+    return true;
+  });
+});
 
 // 默认选择主页
 const selectedKeys = ref(["/"]);
@@ -47,7 +65,7 @@ const doMenuClick = (key: string) => {
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "Rhss",
-    role: "canAdmin",
+    userRole: ACCESS_ENUM.ADMIN,
   });
 }, 3000);
 
