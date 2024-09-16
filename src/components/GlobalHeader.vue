@@ -4,7 +4,7 @@
       <a-menu mode="horizontal" :selected-keys="selectedKeys" @menu-item-click="doMenuClick">
         <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
           <div class="title-bar">
-            <img class="logo" src="../assets/oj-logo.png">
+            <img class="logo" src="../assets/oj-logo.png" alt="暂时无法显示">
             <div class="title">莆田学院机电与信息工程学院在线代码评测平台</div>
           </div>
         </a-menu-item>
@@ -62,12 +62,12 @@ const doMenuClick = (key: string) => {
   })
 }
 
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "Rhss",
-    userRole: ACCESS_ENUM.ADMIN,
-  });
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "Rhss",
+//     userRole: ACCESS_ENUM.ADMIN,
+//   });
+// }, 3000);
 
 </script>
 

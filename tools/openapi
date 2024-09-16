@@ -1,0 +1,2 @@
+自动根据接口文档生成 Axios Ts 请求方法
+openapi --input http://localhost:8101/api/v2/api-docs --output ./generated --client axios

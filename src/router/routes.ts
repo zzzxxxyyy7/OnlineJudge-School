@@ -4,9 +4,32 @@ import AdminView from "../views/AdminView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import accessEnum from "@/access/accessEnum";
+import UserLayout from "@/layouts/UserLayout.vue";
+import UserLoginView from "@/views/user/UserLoginView.vue";
+import UserRegisterView from "@/views/user/UserRegisterView.vue";
 
 // 提取通用路由文件到专门配置并且导出，直接作为 Header 参数传入动态渲染 Header
 export const routes: Array<RouteRecordRaw> = [
+  {
+    path: "/user",
+    name: "用户相关页面",
+    component: UserLayout,
+    meta: {
+      hideInMenu: true,
+    },
+    children: [
+      {
+        path: "/user/login",
+        name: "用户登录",
+        component: UserLoginView,
+      },
+      {
+        path: "/user/register",
+        name: "用户注册",
+        component: UserRegisterView,
+      },
+    ]
+  },
   {
     path: "/",
     name: "题库",

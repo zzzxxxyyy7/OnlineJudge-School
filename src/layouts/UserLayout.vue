@@ -1,8 +1,11 @@
 <template>
-  <div id="basicLayout">
+  <div id="userLayout">
     <a-layout style="min-height: 100vh;">
       <a-layout-header class="header">
-        <GlobalHeader />
+        <a-space>
+          <img class="logo" src="../assets/oj-logo.png" alt="暂时无法显示">
+          <div class="title" style="font-size: x-large">莆田学院机电与信息工程学院在线代码评测平台</div>
+        </a-space>
       </a-layout-header>
 
       <a-layout-content class="content">
@@ -17,27 +20,28 @@
 </template>
 
 <script setup lang="ts">
-import GlobalHeader from '@/components/GlobalHeader.vue';
-
-
 </script>
 
 <style scoped>
-#basicLayout {}
-
-#basicLayout .header {
-  margin-bottom: 16px;
-  box-shadow: #eee 1px 1px 5px;
+#userLayout {
+  text-align: center;
 }
 
-#basicLayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+#userLayout .logo {
+  width: 64px;
+  height: 64px;
+}
+
+#userLayout .header {
+  margin-top: 16px;
+}
+
+#userLayout .content {
   margin-bottom: 16px;
   padding: 20px;
 }
 
-#basicLayout .footer {
-  background: #efefef;
+#userLayout .footer {
   padding: 16px;
   position: sticky;
   bottom: 0;
